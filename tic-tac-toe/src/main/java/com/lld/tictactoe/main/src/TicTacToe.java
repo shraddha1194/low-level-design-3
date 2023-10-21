@@ -5,6 +5,7 @@ import com.lld.tictactoe.main.src.exceptions.InvalidGameLevelException;
 import com.lld.tictactoe.main.src.exceptions.InvalidPlayersException;
 import com.lld.tictactoe.main.src.exceptions.InvalidSymbolException;
 import com.lld.tictactoe.main.src.models.*;
+import com.lld.tictactoe.main.src.strategies.playing.FirstEmptyPlayingStrategy;
 import com.lld.tictactoe.main.src.strategies.playing.RandomPlayingStrategy;
 
 import java.util.Arrays;
@@ -72,11 +73,22 @@ public class TicTacToe {
         } catch (IllegalArgumentException e) {
             throw new InvalidGameLevelException();
         }
-        return BotPlayer.builder()
+        BotPlayer bot = BotPlayer.builder()
                 .symbol(symbol)
                 .level(level)
-                .playingStrategy(new RandomPlayingStrategy())
                 .build();
+        // todo check if factory needed
+        switch(level) {
+            case EASY:
+                bot.setPlayingStrategy(new FirstEmptyPlayingStrategy());
+                break;
+            case MEDIUM:
+            case HARD:
+                bot.setPlayingStrategy(new RandomPlayingStrategy());
+                break;
+        }
+
+        return bot;
     }
 
     private static Game createGame(Player humanPlayer, Player secondPlayer) {

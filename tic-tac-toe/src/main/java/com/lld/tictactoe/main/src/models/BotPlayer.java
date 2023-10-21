@@ -1,9 +1,11 @@
 package com.lld.tictactoe.main.src.models;
 
 import com.lld.tictactoe.main.src.strategies.playing.PlayingStrategy;
+import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
 @SuperBuilder
+@Setter
 public class BotPlayer extends Player {
     private  GameLevel level;
     private PlayingStrategy playingStrategy;

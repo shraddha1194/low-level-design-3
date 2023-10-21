@@ -6,6 +6,7 @@ import com.lld.tictactoe.main.src.models.BoardCell;
 public class FirstEmptyPlayingStrategy implements PlayingStrategy {
     @Override
     public BoardCell makeMove(Board board) {
-        return board.getEmptyCells().stream().findFirst().get();
+        BoardCell firstEmpty = board.getEmptyCells().stream().findFirst().get();
+        return new BoardCell(firstEmpty.getRow(), firstEmpty.getCol());
     }
 }
