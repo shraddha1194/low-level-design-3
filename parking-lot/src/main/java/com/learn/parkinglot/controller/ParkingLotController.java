@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 // Step 1 - Add RestController Annotation
-// Step 2 - Add Request to common path that would map/bring request to our controller
+// Step 2 - Add Request to a common path that would map/bring request to our controller
 @RestController
 @RequestMapping("/api/v1/parking-lot")
 @AllArgsConstructor
@@ -27,7 +27,7 @@ public class ParkingLotController {
     }
 
     // GET /api/v1/parking-lot/{id}
-    // Step 3 - Add method leve mapping
+    // Step 3 - Add method level mapping
     // Step 4 - Add path variable to map the
     @GetMapping("/{id}")
     public ParkingLot getParkingLot(@PathVariable("id") Long id) {

@@ -75,7 +75,7 @@ public class Game {
     }
 
     private boolean checkDraw(GameSymbol symbol) {
-        return false;
+        return board.getEmptyCells().isEmpty();
     }
 
     private void validateMove(BoardCell move) {

@@ -8,7 +8,7 @@ import java.util.List;
 public class RandomPlayingStrategy implements PlayingStrategy{
     @Override
     public BoardCell makeMove(Board board) {
-        // Output -> A cell from the list of avaibale cells
+        // Output -> A cell from the list of available cells
 
         // Get list of empty cells
         List<BoardCell> emptyCells = board.getEmptyCells();

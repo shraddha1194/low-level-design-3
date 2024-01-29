@@ -34,9 +34,9 @@ Build an online parking lot management system that can support the following req
 * A car can only be parked at its slot. Not on any other (even larger).
 * A display on each floor with the _status_ of that floor.
 * _**Fees calculated**_ based on per hour price: e.g. 50 rs for the first hour, then 80 rs per extra hour. **invoice**
-      * Small - 50, 80
-      * Medium - 80, 100
-      * Large - 100, 120
+    * Small - 50, 80
+    * Medium - 80, 100
+    * Large - 100, 120
 
 ### Use case Diagram
 ```plantuml
