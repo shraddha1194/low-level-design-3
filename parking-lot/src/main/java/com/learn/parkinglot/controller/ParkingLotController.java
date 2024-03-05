@@ -31,7 +31,7 @@ public class ParkingLotController {
     // Step 4 - Add path variable to map the
     @GetMapping("/{id}")
     public ParkingLot getParkingLot(@PathVariable("id") Long id) {
-        return ParkingLot.builder().id(id).build();
+        return parkingLotService.getParkingLot(id);
     }
 
 }

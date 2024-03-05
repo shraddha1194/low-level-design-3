@@ -1,11 +1,10 @@
 package com.learn.parkinglot.services;
 
 import com.learn.parkinglot.dto.CreateTicketRequest;
+import com.learn.parkinglot.exceptions.NotFoundException;
 import com.learn.parkinglot.exceptions.SlotNotAvailableException;
-import com.learn.parkinglot.models.ParkingSpot;
-import com.learn.parkinglot.models.SpotStatus;
-import com.learn.parkinglot.models.Ticket;
-import com.learn.parkinglot.models.Vehicle;
+import com.learn.parkinglot.generators.TicketId;
+import com.learn.parkinglot.models.*;
 import com.learn.parkinglot.repositories.TicketRepository;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +18,7 @@ public class TicketService {
 
     private TicketRepository ticketRepository;
     public Ticket createTicket(CreateTicketRequest request) {
-        // Allocate a spot, if null throw an exception
+        // Allocate a spot if null throw an exception
         ParkingSpot parkingSpot = parkingSpotService.allocate(request.getParkingLotId(), request.getVehicleType());
 
         if (parkingSpot == null) {
@@ -34,6 +33,7 @@ public class TicketService {
 
         // Create a ticket and save it
         Ticket ticket = Ticket.builder()
+                .id(TicketId.nextId())
                 .entryTime(LocalDateTime.now())
                 .parkingSpot(allotedSpot)
                 .vehicle(vehicle)
@@ -41,5 +41,18 @@ public class TicketService {
                 .build();
 
         return ticketRepository.save(ticket);
+    }
+
+    public Payment calculateAmount(Long id) {
+        Ticket ticket = ticketRepository.findById(id);
+
+        if (ticket == null) {
+            throw new NotFoundException("Ticket with id: " + id + " not found in the system!!!");
+        }
+
+    }
+
+    public Payment makePayment(Long id) {
+
     }
 }

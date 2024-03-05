@@ -2,12 +2,14 @@ package com.learn.parkinglot.services;
 
 import com.learn.parkinglot.models.ParkingLot;
 import com.learn.parkinglot.models.ParkingSpot;
+import com.learn.parkinglot.models.SpotStatus;
 import com.learn.parkinglot.models.VehicleType;
 import com.learn.parkinglot.repositories.ParkingSpotRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,10 +28,14 @@ public class ParkingSpotService {
     }
 
     public ParkingSpot allocate(Long parkingLotId, VehicleType vehicleType) {
-        return parkingSpotRepository.findByVehicleTypeAndStatusAvailable(vehicleType);
+        return parkingSpotRepository.findByVehicleTypeAndStatusAvailable(parkingLotId, vehicleType);
     }
 
     public ParkingSpot update(ParkingSpot parkingSpot) {
         return parkingSpotRepository.update(parkingSpot);
+    }
+
+    public List<ParkingSpot> findAvailableParkingSpots(VehicleType type) {
+        return parkingSpotRepository.findAllByVehicleTypeAndStatusAvailable(type);
     }
 }

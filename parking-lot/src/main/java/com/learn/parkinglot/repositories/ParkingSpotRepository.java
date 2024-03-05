@@ -55,8 +55,9 @@ public class ParkingSpotRepository {
         return updatedSpot;
     }
 
-    public ParkingSpot findByVehicleTypeAndStatusAvailable(VehicleType vehicleType) {
+    public ParkingSpot findByVehicleTypeAndStatusAvailable(Long id, VehicleType vehicleType) {
         Optional<ParkingSpot> availableSpot = parkingSpots.stream()
+                .filter(spot -> spot.getSpotId() == id)
                 .filter(spot -> spot.getSpotStatus() == SpotStatus.AVAILABLE && spot.getVehicleType() == vehicleType)
                 .findFirst();
 
@@ -65,5 +66,11 @@ public class ParkingSpotRepository {
         }
 
         return null;
+    }
+
+    public List<ParkingSpot> findAllByVehicleTypeAndStatusAvailable(VehicleType vehicleType) {
+        return parkingSpots.stream()
+                .filter(spot -> spot.getSpotStatus() == SpotStatus.AVAILABLE && spot.getVehicleType() == vehicleType)
+                .collect(Collectors.toList());
     }
 }

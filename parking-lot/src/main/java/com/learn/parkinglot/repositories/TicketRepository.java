@@ -8,10 +8,13 @@ import java.util.List;
 
 @Repository
 public class TicketRepository {
-
     private List<Ticket> tickets = new ArrayList<>();
     public Ticket save(Ticket ticket) {
         tickets.add(ticket);
         return ticket;
+    }
+
+    public Ticket findById(Long id) {
+        return tickets.stream().filter(ticket -> ticket.getId() == id).findFirst().orElse(null);
     }
 }

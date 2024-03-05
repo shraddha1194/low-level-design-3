@@ -1,23 +1,27 @@
 package com.learn.parkinglot.controller;
 
 import com.learn.parkinglot.models.ParkingSpot;
+import com.learn.parkinglot.models.VehicleType;
+import com.learn.parkinglot.services.ParkingSpotService;
+import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/v1/parking-spot")
+@AllArgsConstructor
 public class ParkingSpotController {
 
-    // Create a parking spot
-    // POST /parking-spot
-    public ParkingSpot createParkingSpot(ParkingSpot parkingSpot) {
-        return ParkingSpot.builder().build();
-    }
+    ParkingSpotService parkingSpotService;
 
-    // Update a parking spot
-    // PUT /parking-spot/{id}
-
-    // Get a parking spot
-    // GET /parking-spot/{id}
-    public ParkingSpot getParkingSpot(Long parkingSpotId) {
-        return ParkingSpot.builder().build();
+    // Find an Available Parking Spot
+    @GetMapping("/get-available-spots")
+    public List<ParkingSpot> findAvailableParkingSpots(@PathVariable("type") VehicleType type)  {
+        return parkingSpotService.findAvailableParkingSpots(type);
     }
-    // Delete a parking spot
-    // DELETE /parking-spot/{id}
 }

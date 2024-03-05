@@ -2,10 +2,10 @@ package com.learn.parkinglot.generators;
 
 import java.util.concurrent.atomic.AtomicLong;
 
-public class ParkingSpotId {
+public class TicketId {
+    private static AtomicLong ticketId = new AtomicLong();
 
-    private static AtomicLong spotId = new AtomicLong();
     public static Long nextId() {
-        return spotId.getAndIncrement();
+        return ticketId.getAndIncrement();
     }
 }

@@ -19,4 +19,11 @@ public class ParkingSpot extends BaseModel {
                 .spotStatus(SpotStatus.AVAILABLE)
                 .build();
     }
+
+    public static ParkingSpot largeAvailable() {
+        return ParkingSpot.builder()
+                .vehicleType(VehicleType.LARGE)
+                .spotStatus(SpotStatus.AVAILABLE)
+                .build();
+    }
 }
